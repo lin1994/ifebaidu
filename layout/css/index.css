@@ -1,0 +1,100 @@
+a{color: #fff;}
+a:link {color: #fff;}
+a:active {color:#ccc;}
+a:hover{
+    color: #ccc;
+    text-decoration: underline;
+}
+.wrap{
+	width: 960px;
+	height: 100%;
+	position: relative;
+	margin: 0 auto;
+}
+.header{
+	height: 80px;
+	background: #333;
+	color: #fff;
+}
+.logo{
+	display: inline-block;
+	line-height: 80px;
+	font-size: 32px;
+	font-weight: bold;
+}
+.hd-nav{
+	float: right;
+	margin-top: 5px;
+}
+.hd-nav li{
+	float: left;
+	margin-left: 10px;
+}
+.banner{
+	position: relative;
+	background: #66bb33;
+	height: 300px;
+}
+.carousel-indicators{
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	z-index: 1;
+}
+.carousel-indicators .item{
+	border: 1px solid #333;
+	background: #b2dd99;
+	padding: 8px 10px;
+    vertical-align: bottom;
+    display: inline-block;	
+}
+.carousel-indicators .item.active{
+	background: #e0f1d6;
+	padding: 16px 10px 8px;
+}
+.nav{
+	width: 960px;
+	font-size: 0;
+	margin: 20px auto 0;
+}
+.nav-line{
+	height: 1px;
+	background: #e5e5e5;
+}
+.nav li{
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	display: inline-block;
+	padding: 0 30px;
+	border-radius: 20px 20px 0 0;
+	background: #eee;
+	border: 1px solid #e5e5e5;
+	margin-bottom: -1px;
+}
+.nav li.active{
+	background: #fff;
+	border-bottom: 1px solid #fff;
+}
+.content .flex{
+	display: flex;
+	margin-top: 8px;
+}
+.content .item{
+	flex: 1;
+	border: 1px solid #e5e5e5;
+	text-align: center;
+	padding: 80px;
+	margin-left: 8px;
+}
+.content .item:first-child{
+	margin-left: 0;
+}
+.footer{
+	height: 120px;
+	background: #666;
+	color: #fff;
+	margin-top: 20px;
+	text-align: center;
+	padding-top: 20px;
+}

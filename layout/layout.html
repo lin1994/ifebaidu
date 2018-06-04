@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>布局练习</title>
+		<link id="cssTemplate" rel="stylesheet" href="css/reset.css">
+		<link id="cssTemplate" rel="stylesheet" href="css/layout.css">
+	</head>
+	<body>
+		<h2>两栏布局</h2>
+		<div class="layout1">
+			<div class="float1 clearfix mb20">
+				<div class="l">浮动宽度30%</div>
+				<div class="r">浮动宽度70%</div>
+			</div>
+			<div class="position1 mb20">
+				<div class="l">定位宽度30%</div>
+				<div class="r">定位宽度70%</div>
+				&nbsp;
+			</div>
+			<div class="flexbox1 mb20">
+				<div class="l">弹性盒子宽度30%</div>
+				<div class="r">弹性盒子宽度70%</div>
+			</div>
+		</div>
+		<h2>左侧固定宽度</h2>
+		<div class="layout2">
+			<div class="float2 clearfix mb20">
+				<div class="l">浮动宽度200px</div>
+				<div class="r">浮动宽度100% - 200px</div>
+			</div>
+			<div class="position2 mb20">
+				<div class="l">定位宽度200px</div>
+				<div class="r">定位宽度100% - 200px</div>
+				&nbsp;
+			</div>
+			<div class="flexbox2 mb20">
+				<div class="l">弹性盒子宽度200px</div>
+				<div class="r">弹性盒子宽度100% - 200px</div>
+			</div>			
+		</div>
+		<h2>三栏布局</h2>
+		<div class="layout3">
+			<p>左侧固定宽度，右侧固定宽度，中间部分宽度随浏览器宽度变化而自适应变化</p>
+			<div class="float3 clearfix mb20">
+				<div class="l w200 fl">浮动左侧固定宽度</div>
+				<div class="c fl">浮动中间自适应变化</div>
+				<div class="r w200 fl">浮动右侧固定宽度</div>
+			</div>
+			<div class="position3 mb20">
+				<div class="l w200">定位左侧固定宽度</div>
+				<div class="c">定位中间自适应变化</div>
+				<div class="r w200">定位右侧固定宽度</div>
+			</div>
+			<div class="flexbox3 mb20">
+				<div class="l w200">弹性盒子左侧固定宽度</div>
+				<div class="c">弹性盒子中间自适应变化</div>
+				<div class="r w200">弹性盒子右侧固定宽度</div>
+			</div>
+			<p>左侧固定宽度，中间固定宽度，右侧根据浏览器宽度变化而自适应变化</p>
+			<div class="float3 clearfix mb20">
+				<div class="l w200 fl">浮动左侧固定宽度</div>
+				<div class="r w200 fl">浮动中间固定宽度</div>
+				<div class="c fl">浮动右侧自适应变化</div>
+			</div>
+			<div class="position4 mb20">
+				<div class="l w200">定位左侧固定宽度</div>
+				<div class="r w200">定位中间固定宽度</div>
+				<div class="c">定位右侧自适应变化</div>
+			</div>
+			<div class="flexbox3 mb20">
+				<div class="l w200">弹性盒子左侧固定宽度</div>
+				<div class="r w200">弹性盒子中间固定宽度</div>
+				<div class="c">弹性盒子右侧自适应变化</div>
+			</div>
+		</div>
+		<h2>等分布局</h2>
+	    <div class="parent">
+	        <div class="child"></div>
+	        <div class="child"></div>
+	        <div class="child"></div>
+	        <div class="child"></div>
+	    </div>		
+	</body>
+</html>

@@ -1,0 +1,153 @@
+/*-----------两栏布局一-----------*/
+.layout1 .l{
+	width: 30%;
+	background: red;
+}
+.layout1 .r{
+	width: 70%;
+	background: skyblue;	
+}
+.float1 .l{
+	float: left;
+}
+.float1 .r{
+	float: left;
+}
+.position1{
+	position: relative;
+}
+.position1 .l{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.position1 .r{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.flexbox1{
+	display: flex;
+}
+.flexbox1 .l{
+	flex: 30%;
+}
+.flexbox1 .r{
+	flex: 70%;
+}
+/*-----------两栏布局二-----------*/
+.layout2 .l{
+	width: 200px;
+	background: red;
+}
+.layout2 .r{
+	width: calc(100% - 200px);
+	background: skyblue;	
+}
+.float2{
+	width: 100%;
+}
+.float2 .l{
+	float: left;
+}
+.float2 .r{
+	float: left;
+}
+.float2-1 .r{
+	margin-left: 200px;
+}
+.position2{
+	position: relative;
+}
+.position2 .l{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.position2 .r{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.flexbox2{
+	display: flex;
+}
+.flexbox2 .l{
+	flex: 200px;
+}
+/*-----------三栏布局一-----------*/
+.w200{
+	width: 200px;
+}
+.layout3 .l{
+	background: red;
+}
+.layout3 .c{
+	background: yellow;
+}
+.layout3 .r{
+	background: skyblue;
+}
+.float3 .c{
+	width: calc(100% - 400px);
+}
+.position3{
+	position: relative;
+}
+.position3 .l{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.position3 .r{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.position3 .c{
+	margin: 0 200px;
+}
+.flexbox3{
+	display: flex;
+}
+.flexbox3 .c{
+	flex: 1;
+}
+.position4{
+	position: relative;
+}
+.position4 .l{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.position4 .r{
+	position: absolute;
+	left: 200px;
+	top: 0;
+}
+.position4 .c{
+	margin-left: 400px;
+}
+
+.parent{
+    border: 1px solid red;
+    overflow: hidden;
+    margin-left: -10px;
+}
+.child {
+    width: calc(25% - 10px);
+    height: 100px;
+    background: green;
+    float: left;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
