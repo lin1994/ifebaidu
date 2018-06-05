@@ -14,16 +14,27 @@ ol {
   margin: 0;
 }
 
-h1,
+input,button,textarea{
+  padding: 0;
+  border:none;
+  cursor:pointer;
+  outline:medium;
+  vertical-align: middle;
+}
+textarea{
+  resize: none;
+}
+/*h1,
 h2,
 p,
 li {
   line-height: 1.6;
-}
+}*/
 
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
+  color: #141414;
 }
 
 .fl {
@@ -50,8 +61,4 @@ body {
 
 .clearfix {
   *zoom: 1;
-}
-
-.mb20 {
-  margin-bottom: 10px;
 }
