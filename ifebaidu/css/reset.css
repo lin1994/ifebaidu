@@ -24,12 +24,6 @@ input,button,textarea{
 textarea{
   resize: none;
 }
-/*h1,
-h2,
-p,
-li {
-  line-height: 1.6;
-}*/
 
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -43,14 +37,6 @@ body {
 
 .fr {
   float: right;
-}
-
-.rel {
-  position: relative;
-}
-
-.abs {
-  position: absolute;
 }
 
 .clearfix:after {
