@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>JS</title>
+	</head>
+	<body>
+	  <h2>运算</h2>
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result1">运算结果</p>
+    <script>
+      var $result = document.getElementById('result1');
+      document.getElementById('add-btn').onclick = function(){
+        var $firstVal = Number(document.getElementById('first-number').value);
+        var $secondVal = Number(document.getElementById('second-number').value);
+        $result.innerHTML = '运算结果：'+($firstVal+$secondVal);
+      };
+      document.getElementById('minus-btn').onclick = function(){
+        var $firstVal = Number(document.getElementById('first-number').value);
+        var $secondVal = Number(document.getElementById('second-number').value);
+        $result.innerHTML = '运算结果：'+($firstVal-$secondVal);
+      };
+      document.getElementById('times-btn').onclick = function(){
+        var $firstVal = Number(document.getElementById('first-number').value);
+        var $secondVal = Number(document.getElementById('second-number').value);
+        $result.innerHTML = '运算结果：'+($firstVal*$secondVal);
+      };
+      document.getElementById('divide-btn').onclick = function(){
+        var $firstVal = Number(document.getElementById('first-number').value);
+        var $secondVal = Number(document.getElementById('second-number').value);
+        $result.innerHTML = '运算结果：'+($firstVal/$secondVal);
+      };
+    </script>
+    <hr />
+    <h2>十进制数字转化为二进制</h2>
+    <input id="dec-number" type="number" placeholder="输入一个十进制非负整数" />
+    <button id="trans-btn" type="button">转化为二进制</button>
+    <p id="result2">运算结果</p>
+    <script type="text/javascript">
+      var $result2 = document.getElementById('result2');
+      document.getElementById('trans-btn').onclick = function(){
+        var decVal = Number(document.getElementById('dec-number').value);
+        dec2bin(decVal);
+      };
+      function dec2bin(decVal) {
+        //整数取整之后还是自己typeof obj === 'number' && obj%1 === 0
+        if(Math.round(decVal) === decVal && decVal >= 0){
+          $result2.innerHTML = '运算结果：'+decVal.toString(2);
+          console.log(decVal.toString(2).length);
+        }else{
+          $result2.innerHTML = '请输入非负整数';
+        };
+//      //十进制转二进制
+//      result += decNumber%2;
+//      if(parseInt(decNumber/2) == 0){
+//        return result;
+//      }else{
+//        return dec2bin(parseInt(decNumber/2));
+//      };
+      };
+    </script>
+    <hr />
+    <h2>3的小游戏</h2>
+    <p id="result3"></p>
+    <script type="text/javascript">
+    	var $result3 = document.getElementById('result3');
+    	var result3 = '';
+    	for(var i = 0;i < 100;i++){
+    	  if(i == 0){
+    	    continue;
+    	  }
+    	  if(i/3 == 0 || String(i).indexOf('3') > -1){
+    	    result3 += 'PA';
+    	  }else{
+    	    result3 += i;
+    	  };
+    	};
+    	$result3.innerHTML = result3;
+    </script>
+    <hr />
+    <h2>99乘法表</h2>
+    <table id="table" border="1" cellspacing="0" cellpadding="0"></table>
+    <script type="text/javascript">
+    	var arr1 = [1,2,3,4,5,6,7,8,9];
+    	var arr2 = [1,2,3,4,5,6,7,8,9];
+    	var $table = document.getElementById('table');
+    	for(var i = 0;i < arr1.length;i++){
+    	  var x = $table.insertRow(i);
+    	  for(var j = 0;j < arr2.length;j++){
+    	    var y=x.insertCell(j);       
+    	    y.innerHTML = arr1[i]*arr2[j];
+    	    console.log(arr1[i]+'*'+arr2[j]+'='+arr1[i]*arr2[j]);
+    	  };
+    	};
+    </script>
+    <hr />
+    <a href="resume.html">简历链接</a>
+	</body>
+</html>
