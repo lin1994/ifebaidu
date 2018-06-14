@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>让你和页面对话</title>
+    <style type="text/css">
+    	select{
+    	  display: none;
+    	}
+    </style>
+  </head>
+  <body>
+    <input id="name" type="text" />
+    <button id="submit-btn" type="button">Submit</button>
+    <script type="text/javascript">
+      var $name = document.getElementById('name');
+      document.getElementById('submit-btn').addEventListener('click',function(e) {
+        console.log($name.value);
+        e.stopPropagation();
+      },false);
+      document.body.onclick = function(){
+        console.log('body');
+      };
+      $name.onkeydown = function(e) {
+        //      if ($name == document.activeElement) {
+        //          alert('获取焦点');
+        //      } else {
+        //          alert('未获取焦点');
+        //      }
+        //表示键盘监听所触发的事件，同时传递参数event
+        switch(e.keyCode) {
+          case 13:
+            console.log($name.value);
+            break;
+          case 27:
+            $name.value='';
+            break;
+//        default:
+//          console.log(e.keyCode);
+        };
+      };
+    </script>
+    <hr />
+    <label for="school">
+      <input id="school" type="radio" name="status" />
+      School
+    </label>
+    <label for="company">
+      <input id="company" type="radio" name="status" />
+      Company
+    </label>
+    <select id="school-select">
+      <option>北京邮电大学</option>
+      <option>黑龙江大学</option>
+      <option>华中科技大学</option>
+    </select>
+    <select id="company-select">
+      <option>百度</option>
+      <option>爱奇艺</option>
+    </select>
+    <script type="text/javascript">
+    	var $school = document.getElementById('school');
+    	var $schoolSelect = document.getElementById('school-select');
+    	var $company = document.getElementById('company');
+    	var $companySelect = document.getElementById('company-select');
+      $school.onchange = function(){
+        $schoolSelect.style.display = 'block';
+        $companySelect.style.display = 'none';
+      };
+      $company.onchange = function(){
+        $companySelect.style.display = 'block';
+        $schoolSelect.style.display = 'none';
+      };
+    </script>
+    <hr />
+    <ul class="palette">
+    	<li style="background-color: crimson;"></li>
+    	<li style="background-color: bisque;"></li>
+    	<li style="background-color: blueviolet;"></li>
+    	<li style="background-color: coral;"></li>
+    	<li style="background-color: chartreuse;"></li>
+    	<li style="background-color: darkolivegreen;"></li>
+    	<li style="background-color: cyan;"></li>
+    	<li style="background-color: #194738;"></li>
+    </ul>
+    <p class="color-picker"></p>
+    <script type="text/javascript">
+    	var list = document.querySelectorAll("li");
+    	for (var i = 0;i<list.length;i++) {
+    		list[i].onclick = function(e){
+    		  var t = e.target;
+    		  var c = t.style.backgroundColor;
+    		  var p = document.getElementsByClassName("color-picker")[0];
+    		  p.innerHTML = c;
+    		  p.style.color = c;
+    		}
+    	}
+    </script>
+    <hr />
+    <div id="fade-obj" style="width: 300px;height: 300px;background: #000;"></div>
+    <button id="fade-btn">淡出</button>
+    <script type="text/javascript">
+      var $fadeObj = document.getElementById('fade-obj');
+      var $fadeBtn = document.getElementById('fade-btn');
+    	$fadeBtn.onclick = function(){
+    	  $fadeBtn.setAttribute("disabled","disabled");
+    	  //淡入
+    	  if($fadeBtn.innerHTML == '淡入'){
+    	    var count = 0;
+          var t = setInterval(function(){
+            count = count+1;
+            $fadeObj.style.opacity = count/100;
+            if(count == 100){
+              clearInterval(t);
+              $fadeBtn.innerHTML = '淡出';
+              $fadeBtn.removeAttribute('disabled');
+            }            
+          },30);
+    	  }else{
+    	    var count = 100;
+      	  var t = setInterval(function(){
+      	    count = count-1;
+      	    $fadeObj.style.opacity = count/100;
+      	    if(count == 0){
+      	      clearInterval(t);
+      	      $fadeBtn.innerHTML = '淡入';
+      	      $fadeBtn.removeAttribute('disabled');
+      	    }
+      	  },30);
+//    	  setTimeout(function(){
+//    	    clearInterval(t);
+//    	    $fadeBtn.innerHTML = '淡入';
+//    	    $fadeBtn.removeAttribute('disabled');
+//    	  },1000);
+    	  };
+    	};
+    </script>
+    <hr />
+    <div id="sprite" style="width: 480px;height: 480px;background: url(image/erik_ce204002.jpg) no-repeat;background-position-x: 0;background-position-y: 0;"></div>
+    <script type="text/javascript">
+      var $sprite = document.getElementById('sprite');
+      var count = 0;
+      var falg = false;
+      var s = setInterval(function(){
+        $sprite.style.backgroundPositionY = -480*count+'px';
+        if(!falg){
+          count = count+1;
+        }else{
+          count = count-1;
+        };
+        if(count == 0){
+          falg = false;
+        }else if(count == 16){
+          falg = true
+        }
+      },100);
+//    setTimeout(function(){
+//      clearInterval(s);
+//    },10000);
+    </script>
+  </body>
+
+</html>
