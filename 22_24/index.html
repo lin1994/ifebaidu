@@ -360,9 +360,9 @@
       // 假设id和name均不会重复，根据输入name找到对应的id
       function findIdByName(name) {
         var treeId = '';
-        var preOrder = function (node) {
-          if (node) {
-            if(node.name == name){
+        var preOrder = function(node) {
+          if(node) {
+            if(node.name == name) {
               treeId = node.id;
               return;
             }
@@ -371,15 +371,15 @@
           }
         };
         preOrder(tree);
-        console.log('treeId:'+treeId);
+        console.log('treeId:' + treeId);
       };
       findIdByName('root');
       // 假设id和name均不会重复，根据输入id找到对应的name
       function findNameById(id) {
         var treeName = '';
-        var preOrder = function (node) {
-          if (node) {
-            if(node.id == id){
+        var preOrder = function(node) {
+          if(node) {
+            if(node.id == id) {
               treeName = node.name;
               return;
             }
@@ -388,14 +388,14 @@
           }
         };
         preOrder(tree);
-        console.log('treeName:'+treeName);
+        console.log('treeName:' + treeName);
       };
       findNameById(7);
       // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
       function getListWithDLR() {
         var value = '';
-        var preOrder = function (node) {
-          if (node) {
+        var preOrder = function(node) {
+          if(node) {
             value += node.name;
             preOrder(node.left);
             preOrder(node.right);
@@ -408,8 +408,8 @@
       // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
       function getListWithLDR() {
         var value = '';
-        var preOrder = function (node) {
-          if (node) {
+        var preOrder = function(node) {
+          if(node) {
             preOrder(node.left);
             value += node.name;
             preOrder(node.right);
@@ -422,8 +422,8 @@
       // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
       function getListWithLRD() {
         var value = '';
-        var preOrder = function (node) {
-          if (node) {
+        var preOrder = function(node) {
+          if(node) {
             preOrder(node.left);
             preOrder(node.right);
             value += node.name;
@@ -435,7 +435,7 @@
       getListWithLRD();
     </script>
     <input id="queue-input" type="text">
-    <p id="queue-cont">队列内容：apple-&gt;pear</p>    
+    <p id="queue-cont">队列内容：apple-&gt;pear</p>
     <button id="in-btn">入队</button>
     <button id="out-btn">出队</button>
     <button id="font-btn">打印队头元素内容</button>
@@ -444,30 +444,30 @@
       var queue = ["apple", "pear"];
       var $queueInput = document.getElementById('queue-input');
       var $queueCont = document.getElementById('queue-cont');
-      document.getElementById('in-btn').onclick = function(){
-        if($queueInput.value){
-//        queue.push($queueInput.value);
+      document.getElementById('in-btn').onclick = function() {
+        if($queueInput.value) {
+          //        queue.push($queueInput.value);
           queue.unshift($queueInput.value);
-          $queueCont.innerHTML = '队列内容：'+queue.join('-&gt;');
+          $queueCont.innerHTML = '队列内容：' + queue.join('-&gt;');
         }
       };
-      document.getElementById('out-btn').onclick = function(){
-        if(queue.length > 0){
-  //      queue.shift();
+      document.getElementById('out-btn').onclick = function() {
+        if(queue.length > 0) {
+          //      queue.shift();
           queue.pop();
-          $queueCont.innerHTML = '队列内容：'+queue.join('-&gt;');
+          $queueCont.innerHTML = '队列内容：' + queue.join('-&gt;');
         }
       };
-      document.getElementById('font-btn').onclick = function(){
-        console.log('队头元素内容：'+queue[queue.length-1])
+      document.getElementById('font-btn').onclick = function() {
+        console.log('队头元素内容：' + queue[queue.length - 1])
       };
-      document.getElementById('empty-btn').onclick = function(){
-        console.log(queue.length > 0?'队列不为空':'队列为空');
+      document.getElementById('empty-btn').onclick = function() {
+        console.log(queue.length > 0 ? '队列不为空' : '队列为空');
       };
     </script>
     <hr />
     <input id="stack-input" type="text">
-    <p id="stack-cont">栈内容：apple-&gt;pear</p>    
+    <p id="stack-cont">栈内容：apple-&gt;pear</p>
     <button id="push-btn">进栈</button>
     <button id="pop-btn">退栈</button>
     <button id="stack-font-btn">打印栈顶元素内容</button>
@@ -476,91 +476,96 @@
       var stack = ["apple", "pear"];
       var $stackInput = document.getElementById('stack-input');
       var $stackCont = document.getElementById('stack-cont');
-      document.getElementById('push-btn').onclick = function(){
-        if($stackInput.value){
+      document.getElementById('push-btn').onclick = function() {
+        if($stackInput.value) {
           stack.push($stackInput.value);
-//        queue.unshift($queueInput.value);
-          $stackCont.innerHTML = '栈内容：'+stack.join('-&gt;');
+          //        queue.unshift($queueInput.value);
+          $stackCont.innerHTML = '栈内容：' + stack.join('-&gt;');
         }
       };
-      document.getElementById('pop-btn').onclick = function(){
-        if(stack.length > 0){
+      document.getElementById('pop-btn').onclick = function() {
+        if(stack.length > 0) {
           stack.pop();
-//        stack.shift();
-          $stackCont.innerHTML = '栈内容：'+stack.join('-&gt;');
+          //        stack.shift();
+          $stackCont.innerHTML = '栈内容：' + stack.join('-&gt;');
         }
       };
-      document.getElementById('stack-font-btn').onclick = function(){
-        console.log('栈顶元素内容：'+stack[stack.length-1])
+      document.getElementById('stack-font-btn').onclick = function() {
+        console.log('栈顶元素内容：' + stack[stack.length - 1])
       };
-      document.getElementById('stack-empty-btn').onclick = function(){
-        console.log(stack.length > 0?'栈不为空':'栈为空');
-      };      
+      document.getElementById('stack-empty-btn').onclick = function() {
+        console.log(stack.length > 0 ? '栈不为空' : '栈为空');
+      };
     </script>
     <script type="text/javascript">
-    	var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
-    	arr1.sort(function(a,b){
-    	  return a-b
-    	});
-    	console.log(arr1);
-    	var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
-    	arr2.sort(function(a,b){
-    	  return b.charCodeAt(0)-a.charCodeAt(0)
-    	})
-    	console.log(arr2);
-    	console.log(arr2.reverse());
-    	var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
-      arr3.sort(function(a,b){
-        return (b[1]-a[1]);
+      var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+      arr1.sort(function(a, b) {
+        return a - b
+      });
+      console.log(arr1);
+      var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+      arr2.sort(function(a, b) {
+        return b.charCodeAt(0) - a.charCodeAt(0)
+      })
+      console.log(arr2);
+      console.log(arr2.reverse());
+      var arr3 = [
+        [10, 14],
+        [16, 60],
+        [7, 44],
+        [26, 35],
+        [22, 63]
+      ];
+      arr3.sort(function(a, b) {
+        return(b[1] - a[1]);
       });
       console.log(arr3);
-      var arr4 = [
-          {
-              id: 1,
-              name: 'candy',
-              value: 40
-          }, {
-              id: 2,
-              name: 'Simon',
-              value: 50
-          }, {
-              id: 3,
-              name: 'Tony',
-              value: 45
-          }, {
-              id: 4,
-              name: 'Annie',
-              value: 60
-          }
-      ];
-      arr4.sort(function(a,b){
-        return (a.value-b.value);
+      var arr4 = [{
+        id: 1,
+        name: 'candy',
+        value: 40
+      }, {
+        id: 2,
+        name: 'Simon',
+        value: 50
+      }, {
+        id: 3,
+        name: 'Tony',
+        value: 45
+      }, {
+        id: 4,
+        name: 'Annie',
+        value: 60
+      }];
+      arr4.sort(function(a, b) {
+        return(a.value - b.value);
       });
       console.log(arr4);
     </script>
     <script type="text/javascript">
       var scoreObject = {
-          "Tony": {
-              "Math": 95,
-              "English": 79,
-              "Music": 68
-          }, 
-          "Simon": {
-              "Math": 100,
-              "English": 95,
-              "Music": 98
-          }, 
-          "Annie": {
-              "Math": 54,
-              "English": 65,
-              "Music": 88
-          }
+        "Tony": {
+          "Math": 95,
+          "English": 79,
+          "Music": 68
+        },
+        "Simon": {
+          "Math": 100,
+          "English": 95,
+          "Music": 98
+        },
+        "Annie": {
+          "Math": 54,
+          "English": 65,
+          "Music": 88
+        }
       };
-      function scoreObjectArr(scoreObject){
+
+      function scoreObjectArr(scoreObject) {
         var scoreArray = [];
-        for (i in scoreObject) {
+        for(i in scoreObject) {
           var scoreItem = [i];
-          for (j in scoreObject[i]) {
+          for(j in scoreObject[i]) {
             scoreItem.push(scoreObject[i][j])
           }
           scoreArray.push(scoreItem);
@@ -568,27 +573,46 @@
         return scoreArray;
       };
       console.log(scoreObjectArr(scoreObject));
-//    var menuArr = [
-//        [1, "Area1", -1],
-//        [2, "Area2", -1],
-//        [3, "Area1-1", 1],
-//        [4, "Area1-2", 1],
-//        [5, "Area2-1", 2],
-//        [6, "Area2-2", 2],
-//        [7, "Area1-2-3", 4],
-//        [8, "Area2-2-1", 6],
-//    ];
-//    var menuObject = {};
-//    for (var i=0;i<menuArr.length;i++) {
-//    	var data = menuArr[i];
-//    	if(!menuObject[data[2]]){
-//      	menuObject[data[0]] = {
-//      	  id: data[0],
-//      	  name: data[1]
-//      	};
-//    	}
-//    };
-//    console.log(menuObject);
+      var menuArr = [
+        [1, "Area1", -1],
+        [2, "Area2", -1],
+        [3, "Area1-1", 1],
+        [4, "Area1-2", 1],
+        [5, "Area2-1", 2],
+        [6, "Area2-2", 2],
+        [7, "Area1-2-3", 4],
+        [8, "Area2-2-1", 6],
+      ];
+      //想不出来
+      //参考了https://jiang-hj.github.io/work/day22/day22-10.html
+      var temp = new Object();
+
+      function toObject(n) {
+        let menuObject = new Object();
+        for(let i = n >= 0 ? n : 0; i < menuArr.length; i++) {
+          if(Number(menuArr[i][2] === n)) {
+            let t = 0;
+            for(let j = i; j < menuArr.length; j++) {
+              if(Number(menuArr[j][2] === menuArr[i][0])) {
+                t++;
+              }
+            }
+            if(t > 0) {
+              menuObject[menuArr[i][0]] = {
+                name: menuArr[i][1],
+                subMenu: toObject(menuArr[i][0])
+              }
+            } else {
+              menuObject[menuArr[i][0]] = {
+                name: menuArr[i][1]
+              }
+            }
+          }
+        }
+        return menuObject;
+
+      }
+      console.log(toObject(-1));
     </script>
   </body>
 

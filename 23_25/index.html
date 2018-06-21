@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv="X-UA-compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <title>学习 JavaScript 的函数</title>
+  </head>
+
+  <body onload="startTime()">
+    <script>
+      function GoSteps(n) {
+        if(n === null) {
+          n = 0;
+        }
+        if(n === undefined) {
+          n = 1;
+        }
+        while(Math.floor(Number(n)) > 0) {
+          Go();
+          n--
+        }
+      };
+
+      function Go() {
+        console.log('Go');
+      };
+      GoSteps(10); // Go 10次
+      GoSteps(1); // Go 1次
+      GoSteps(); // Go 1次，认为缺少参数时，默认参数为1
+      GoSteps(0); // 0次
+      GoSteps(-1); // 0次
+      GoSteps(1.4); // Go 1次
+      GoSteps(1.6); // Go 1次
+      GoSteps(true); // Go 1次
+      GoSteps(false); // 0次
+      GoSteps("Test"); // 0次
+      GoSteps(NaN); // 0次
+      GoSteps(null); // 0次
+    </script>
+    <hr />
+    <div id="txt"></div>
+    <script type="text/javascript">
+      var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var weekdayChinese = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+
+      function getWeekday(time, type) {
+        if(type == 1) {
+          return weekday[time.getDay()];
+        }
+        return weekdayChinese[time.getDay()];
+      };
+
+      function getTimeFrame(time) {
+        if(time.getHours() > 0 || time.getHours() < 12) {
+          return 'AM';
+        } else {
+          return 'PM';
+        };
+      };
+
+      function formatNumber(n) {
+        n = n.toString()
+        return n[1] ? n : '0' + n;
+      };
+
+      function formatTime(time, format) {
+        var formatArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+        var dateArr = [];
+        format = format || '';
+        time = time || new Date();
+        dateArr.push(time.getFullYear());
+        dateArr.push(formatNumber(time.getMonth() + 1));
+        dateArr.push(formatNumber(time.getDate()));
+
+        dateArr.push(formatNumber(time.getHours()));
+        dateArr.push(formatNumber(time.getMinutes()));
+        dateArr.push(formatNumber(time.getSeconds()));
+        for(var i in dateArr) {
+          format = format.replace(formatArr[i], dateArr[i]);
+        };
+        return format;
+      };
+
+      function startTime() {
+        var today = new Date();
+        var format1 = formatTime(today, 'Y-M-D ') + getWeekday(today) + formatTime(today, ' h:m:s');
+        var format2 = formatTime(today, 'Y-M-D ') + getWeekday(today, 1) + formatTime(today, ' h:m:s ') + getTimeFrame(today);
+        document.getElementById('txt').innerHTML = format1 + "<br/>" + format2;
+        setTimeout("startTime()", 1000);
+      };
+    </script>
+    <hr />
+    <select id="year-select"></select>
+    <select id="month-select"></select>
+    <select id="day-select">
+      <option value="1">1</option>
+    </select>
+    <select id="hour-select"></select>
+    <select id="minite-select"></select>
+    <select id="second-select"></select>
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+    <script type="text/javascript">
+    	var $yearSelect = document.getElementById('year-select');
+    	var $monthSelect = document.getElementById('month-select');
+    	var $daySelect = document.getElementById('day-select');
+    	var $hourSelect = document.getElementById('hour-select');
+    	var $miniteSelect = document.getElementById('minite-select');
+    	var $secondSelect = document.getElementById('second-select');
+      function mGetDate(year,month){       
+        var d = new Date(year, month, 0);
+        return d.getDate();
+      };
+      //初始化
+      for (var i = 0;i<60;i++) {
+        if(i < 33){
+          var yearOption=document.createElement("option");
+          yearOption.value = 2000+i;
+          yearOption.innerHTML = 2000+i;
+          $yearSelect.appendChild(yearOption);
+        }
+        if(i > 0 && i < 13){
+          var monthOption=document.createElement("option");
+          monthOption.value = i;
+          monthOption.innerHTML = i;
+          $monthSelect.appendChild(monthOption);
+        }
+        if(i<24){
+          var hourOption=document.createElement("option");
+          if(i < 10){
+            hourOption.value = '0'+i;
+            hourOption.innerHTML = '0'+i;
+          }else{
+            hourOption.value = i;
+            hourOption.innerHTML = i;
+          };
+          $hourSelect.appendChild(hourOption);
+        }
+        var miniteOption=document.createElement("option");
+        if(i < 10){
+          miniteOption.value = '0'+i;
+          miniteOption.innerHTML = '0'+i;
+        }else{
+          miniteOption.value = i;
+          miniteOption.innerHTML = i;
+        };
+        $miniteSelect.appendChild(miniteOption);
+        var secondOption=document.createElement("option");
+        if(i < 10){
+          secondOption.value = '0'+i;
+          secondOption.innerHTML = '0'+i;
+        }else{
+          secondOption.value = i;
+          secondOption.innerHTML = i;
+        };
+      	$secondSelect.appendChild(secondOption);
+      };
+      $yearSelect.onchange = function(){
+        var year = getSelectVal($yearSelect);
+        var month = getSelectVal($monthSelect);         
+        setDaySelect(mGetDate(year,month));
+        getSelectTime();
+      };
+      $monthSelect.onchange = function(){
+        var year = getSelectVal($yearSelect);
+        var month = getSelectVal($monthSelect);         
+        setDaySelect(mGetDate(year,month));
+        getSelectTime();
+      };
+      $daySelect.onchange = function(){
+        getSelectTime();
+      };
+      $hourSelect.onchange = function(){
+        var value = getSelectVal(this);
+        getSelectTime();
+      };
+      $miniteSelect.onchange = function(){
+        var value = getSelectVal(this);
+        getSelectTime();
+      };
+      $secondSelect.onchange = function(){
+        var value = getSelectVal(this);
+        getSelectTime();
+      };
+      //根据Select获取值
+      function getSelectVal(obj){
+        var index = obj.selectedIndex; // 选中索引
+        var value = obj.options[index].value; // 选中值
+        return value
+      };
+      //设置天数
+      function setDaySelect(length){
+        $daySelect.innerHTML = '';
+        for (var i = 0;i<length;i++) {
+          var dayOption=document.createElement("option");
+          dayOption.value = i+1;
+          dayOption.innerHTML = i+1;
+          $daySelect.appendChild(dayOption);
+        };
+      };
+      var year = getSelectVal($yearSelect);
+      var month = getSelectVal($monthSelect);
+      setDaySelect(mGetDate(year,month));
+      
+      //获取选择的时间
+      function getSelectTime(){
+        var d = new Date();
+        d.setFullYear(getSelectVal($yearSelect),getSelectVal($monthSelect)-1,getSelectVal($daySelect));
+        d.setHours(getSelectVal($hourSelect),getSelectVal($miniteSelect),getSelectVal($secondSelect));
+        
+        var curTime = new Date();
+        console.log(d.getTime()-curTime.getTime());
+        var resultTxt = '';
+        var distanceTime = d.getTime()-curTime.getTime();
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        if(distanceTime > 0){
+          distanceTime = new Date(distanceTime - 8 * 3600 * 1000);
+          resultTxt = ' 还有 '+parseInt(distanceTime/days)+'天'+distanceTime.getHours()+'小时'+distanceTime.getMinutes()+'分'+distanceTime.getSeconds()+'秒';
+        }else{
+          distanceTime = new Date(Math.abs(distanceTime) - 8 * 3600 * 1000);
+          resultTxt = '已经过去 '+parseInt(distanceTime.getTime()/days)+'天'+distanceTime.getHours()+'小时'+distanceTime.getMinutes()+'分'+distanceTime.getSeconds()+'秒';
+        };
+        document.getElementById('result-wrapper').innerHTML = '现在距离 '+formatTime(d, 'Y年M月D日 ')+getWeekday(d)+formatTime(d, ' h:m:s')+resultTxt;
+      };
+      getSelectTime();
+    </script>
+  </body>
+
+</html>
