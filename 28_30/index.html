@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv="X-UA-compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <title>发个邮件</title>
+    <style type="text/css">
+      input {
+        border: none;
+      }
+      
+      ul,
+      input {
+        padding: 0;
+      }
+      
+      ul {
+        list-style: none;
+        margin: 0;
+      }
+      
+      .wrapper {
+        position: relative;
+        width: 200px;
+        margin: 100px auto;
+        border: 1px solid #ccc;
+      }
+      
+      #email-input,
+      #email-sug-wrapper {
+        width: 100%;
+      }
+      
+      #email-input,
+      #email-sug-wrapper li {
+        line-height: 34px;
+        padding-left: 10px;
+        box-sizing: border-box;
+      }
+      
+      #email-sug-wrapper li {
+        border-top: 1px solid #ccc;
+        color: #aaa;
+      }
+      #email-sug-wrapper li:hover{
+        background: pink;
+      }
+      #email-sug-wrapper li.active{
+        background: skyblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <input id="email-input" type="text" />
+      <ul id="email-sug-wrapper" class="email-sug" style="display: none;">
+        <li>linj@163.com</li>
+        <li>linj@163.com</li>
+        <li>linj@163.com</li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      var $emailInput = document.getElementById('email-input');
+      var $ul = document.getElementById('email-sug-wrapper');
+      // 邮箱后缀List参考
+      var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+      var HtmlUtil = {
+        /*3.用正则表达式实现html转码*/
+        htmlEncodeByRegExp:function (str){  
+             var s = "";
+             if(str.length == 0) return "";
+             s = str.replace(/&/g,"&amp;");
+             s = s.replace(/</g,"&lt;");
+             s = s.replace(/>/g,"&gt;");
+             s = s.replace(/ /g,"&nbsp;");
+             s = s.replace(/\'/g,"&#39;");
+             s = s.replace(/\"/g,"&quot;");
+             return s;  
+        },
+        /*4.用正则表达式实现html解码*/
+        htmlDecodeByRegExp:function (str){  
+          var s = "";
+          if(str.length == 0) return "";
+          s = str.replace(/&amp;/g,"&");
+          s = s.replace(/&lt;/g,"<");
+          s = s.replace(/&gt;/g,">");
+          s = s.replace(/&nbsp;/g," ");
+          s = s.replace(/&#39;/g,"\'");
+          s = s.replace(/&quot;/g,"\"");
+          return s;
+        }        
+      };
+      /*
+       * 字符串头尾去除空格的函数
+       */
+      function diyTrim(str) {
+        var result = "";
+        // do something
+        if(str) {
+          if(str.indexOf(' ') == 0 || str.indexOf('　') == 0) {
+            result = str.substring(1, str.length);
+            return diyTrim(result);
+          } else if(str.lastIndexOf(' ') == str.length - 1 || str.lastIndexOf('　') == str.length - 1) {
+            result = str.substring(0, str.length - 1);
+            return diyTrim(result);
+          } else {
+            return str;
+          };
+        } else {
+          return str;
+        };
+      };
+      //生成提示框中的提示内容
+      function getList(value) {
+        var valueStart = value,
+          valueEnd;
+        if(value.indexOf('@') >= 0) {
+          valueStart = value.substring(0, value.indexOf('@'));
+          valueEnd = value.substring(value.indexOf('@') + 1);
+        }
+        var htmlLi = '';
+        var notMatch = 0;
+        for(var i = 0; i < postfixList.length; i++) {
+          if(valueEnd) {
+            if(postfixList[i].indexOf(valueEnd) >= 0) {
+              htmlLi += '<li>' + valueStart + '@' + postfixList[i] + '</li>';
+            } else {
+              notMatch++;
+            };
+          } else {
+            htmlLi += '<li>' + valueStart + '@' + postfixList[i] + '</li>';
+          };
+        };
+        if(notMatch == postfixList.length) {
+          for(var i = 0; i < postfixList.length; i++) {
+            htmlLi += '<li>' + valueStart + '@' + postfixList[i] + '</li>';
+          };
+        }
+        return htmlLi;
+      };
+      //将提示内容添加到email-sug-wrapper中
+      function setList(value){
+        value = HtmlUtil.htmlEncodeByRegExp(value);
+        $ul.innerHTML = getList(value);
+        var list = document.querySelectorAll("#email-sug-wrapper li");
+        for (var i = 0;i<list.length;i++) {
+          list[i].index = i;
+          //设置选中
+          if(nowSelectTipIndex == i){
+            list[i].classList.add("active");
+          }
+          list[i].onclick = function(e){
+            var t = e.target;
+            $emailInput.value = HtmlUtil.htmlDecodeByRegExp(t.innerHTML);
+            hideUl();
+          }
+        };
+      };
+      //控制email-sug-wrapper的显示/隐藏状态
+      function showUl() {
+        $ul.style.display = 'block';
+      };
+      function hideUl() {
+        $ul.style.display = 'none';
+      };
+      // 增加一个变量，用于存储当前选中的提示Li的序号
+      var nowSelectTipIndex = 0;      
+      //输入监听
+      $emailInput.focus();
+      $emailInput.onkeyup = function(e) {
+        switch(e.keyCode) {
+          case 13: //Enter
+            var $active = document.querySelectorAll("#email-sug-wrapper li")[nowSelectTipIndex];
+            $emailInput.value = HtmlUtil.htmlDecodeByRegExp($active.innerHTML);
+            hideUl();
+            $emailInput.focus();
+            break;
+//        case 37: //left
+//          console.log('left');
+//          break;
+//        case 39: //right
+//          console.log('right');
+//          break;
+          case 27: //Esc
+            $emailInput.select();
+            break;
+          case 38: //up
+//          var $active = $ul.querySelector("li.active");
+//          $active.classList.remove("active");
+//          if($active.previousSibling){
+//            $active.previousSibling.classList.add("active");
+//          }else{
+//            $ul.querySelector("li:last-child").classList.add("active");
+//          };
+            var list = document.querySelectorAll("#email-sug-wrapper li");
+            if(nowSelectTipIndex == 0){
+              nowSelectTipIndex = list.length-1;
+            }else{
+              nowSelectTipIndex--;
+            };
+            setList(diyTrim($emailInput.value));
+            console.log(nowSelectTipIndex);
+            break;
+          case 40: //down
+//          var $active = $ul.querySelector("li.active");
+//          $active.classList.remove("active");
+//          if($active.nextSibling){
+//            $active.nextSibling.classList.add("active");
+//          }else{
+//            $ul.querySelector("li").classList.add("active");
+//          };
+            var list = document.querySelectorAll("#email-sug-wrapper li");
+            if(nowSelectTipIndex >= list.length-1){
+              nowSelectTipIndex = 0;
+            }else{
+              nowSelectTipIndex++;
+            };
+            setList(diyTrim($emailInput.value));
+            console.log(nowSelectTipIndex);
+            break;
+          default:
+            //表示键盘监听所触发的事件，同时传递参数event
+            //重置
+            nowSelectTipIndex = 0;
+            if(diyTrim($emailInput.value)) {
+              setList(diyTrim($emailInput.value));
+              showUl();
+            } else {
+              hideUl();
+            };
+        };
+      };
+    </script>
+  </body>
+
+</html>
